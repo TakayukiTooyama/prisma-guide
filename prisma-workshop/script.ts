@@ -92,11 +92,11 @@ const main = async () => {
   // ];
 
   // Task9: リレーションを結果に含めるためのネストしたクエリの作成
-  const result = await prisma.user.findMany({
-    where: { email: "alice@prisma.io" },
-    include: { posts: true },
-  });
-  console.dir(result, { depth: null });
+  // const result = await prisma.user.findMany({
+  //   where: { email: "alice@prisma.io" },
+  //   include: { posts: true },
+  // });
+  // console.dir(result, { depth: null });
   // [
   //   {
   //     id: 4,
@@ -113,6 +113,22 @@ const main = async () => {
   //     ],
   //   },
   // ];
+
+  // Task10: 新しい User レコードと新しい Post レコードを作成する入れ子式の書き込みクエリを作成する
+  const result = await prisma.user.create({
+    data: {
+      email: "taka@prisma.io",
+      name: "takamaru",
+      posts: {
+        create: {
+          title: "test title 2",
+          content: "test content 2",
+        },
+      },
+    },
+  });
+  console.dir(result, { depth: null });
+  // { id: 5, email: 'taka@prisma.io', name: 'takamaru' }
 };
 
 main()
