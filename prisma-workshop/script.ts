@@ -33,9 +33,29 @@ const main = async () => {
   // console.log(result);
 
   // Task4: データベースに Post テーブルを追加する
-  const result = await prisma.post.create({
+  // const result = await prisma.post.create({
+  //   data: {
+  //     title: "Hello World",
+  //   },
+  // });
+  // console.log(result);
+  // {
+  //   id: 1,
+  //   title: 'Hello World',
+  //   content: null,
+  //   published: false,
+  //   authorId: null
+  // }
+
+  // Task6: User レコードと Post レコードを接続するクエリの作成
+  const result = await prisma.post.update({
+    where: {
+      id: 1,
+    },
     data: {
-      title: "Hello World",
+      author: {
+        connect: { email: "alice@prisma.io" },
+      },
     },
   });
   console.log(result);
@@ -44,7 +64,7 @@ const main = async () => {
   //   title: 'Hello World',
   //   content: null,
   //   published: false,
-  //   authorId: null
+  //   authorId: 4
   // }
 };
 
