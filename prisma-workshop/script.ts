@@ -22,15 +22,30 @@ const main = async () => {
   // { id: 4, email: 'alice@prisma.io', name: null }
 
   // Task3: 既存の User レコードを更新するクエリの作成
-  const result = await prisma.user.update({
-    where: {
-      email: "alice@prisma.io",
-    },
+  // const result = await prisma.user.update({
+  //   where: {
+  //     email: "alice@prisma.io",
+  //   },
+  //   data: {
+  //     name: "Alice",
+  //   },
+  // });
+  // console.log(result);
+
+  // Task4: データベースに Post テーブルを追加する
+  const result = await prisma.post.create({
     data: {
-      name: "Alice",
+      title: "Hello World",
     },
   });
   console.log(result);
+  // {
+  //   id: 1,
+  //   title: 'Hello World',
+  //   content: null,
+  //   published: false,
+  //   authorId: null
+  // }
 };
 
 main()
