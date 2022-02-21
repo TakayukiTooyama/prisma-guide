@@ -115,20 +115,35 @@ const main = async () => {
   // ];
 
   // Task10: 新しい User レコードと新しい Post レコードを作成する入れ子式の書き込みクエリを作成する
-  const result = await prisma.user.create({
-    data: {
-      email: "taka@prisma.io",
-      name: "takamaru",
-      posts: {
-        create: {
-          title: "test title 2",
-          content: "test content 2",
-        },
+  // const result = await prisma.user.create({
+  //   data: {
+  //     email: "taka@prisma.io",
+  //     name: "takamaru",
+  //     posts: {
+  //       create: {
+  //         title: "test title 2",
+  //         content: "test content 2",
+  //       },
+  //     },
+  //   },
+  // });
+  // console.dir(result, { depth: null });
+  // { id: 5, email: 'taka@prisma.io', name: 'takamaru' }
+
+  // Task11: 名前が "A "で始まるユーザーをフィルタリングするクエリを作成する
+  const result = await prisma.user.findMany({
+    where: {
+      name: {
+        startsWith: "A",
       },
     },
   });
-  console.dir(result, { depth: null });
-  // { id: 5, email: 'taka@prisma.io', name: 'takamaru' }
+  console.log(result);
+  // 大文字と小文字の区別をしてくれない...
+  // [
+  //   { id: 2, email: "akane@gmail.com", name: "akane" },
+  //   { id: 4, email: "alice@prisma.io", name: "Alice" },
+  // ];
 };
 
 main()
