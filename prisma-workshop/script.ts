@@ -48,17 +48,17 @@ const main = async () => {
   // }
 
   // Task6: User レコードと Post レコードを接続するクエリの作成
-  const result = await prisma.post.update({
-    where: {
-      id: 1,
-    },
-    data: {
-      author: {
-        connect: { email: "alice@prisma.io" },
-      },
-    },
-  });
-  console.log(result);
+  // const result = await prisma.post.update({
+  //   where: {
+  //     id: 1,
+  //   },
+  //   data: {
+  //     author: {
+  //       connect: { email: "alice@prisma.io" },
+  //     },
+  //   },
+  // });
+  // console.log(result);
   // {
   //   id: 1,
   //   title: 'Hello World',
@@ -66,6 +66,15 @@ const main = async () => {
   //   published: false,
   //   authorId: 4
   // }
+
+  // Task7: 一意な値を持つ単一の User レコードを取得するクエリの作成
+  const result = await prisma.user.findUnique({
+    where: {
+      email: "alice@prisma.io",
+    },
+  });
+  console.log(result);
+  // { id: 4, email: 'alice@prisma.io', name: 'Alice' }
 };
 
 main()
