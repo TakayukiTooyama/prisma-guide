@@ -3,3 +3,9 @@
 node_modules
 package-lock.json
 *.env*
+
+# sqlite
+**/*.db
+**/db/*.db
+**/db/*.prisma
+**/db/*.sqlite
