@@ -131,19 +131,37 @@ const main = async () => {
   // { id: 5, email: 'taka@prisma.io', name: 'takamaru' }
 
   // Task11: 名前が "A "で始まるユーザーをフィルタリングするクエリを作成する
-  const result = await prisma.user.findMany({
-    where: {
-      name: {
-        startsWith: "A",
-      },
-    },
-  });
-  console.log(result);
+  // const result = await prisma.user.findMany({
+  //   where: {
+  //     name: {
+  //       startsWith: "A",
+  //     },
+  //   },
+  // });
+  // console.log(result);
   // 大文字と小文字の区別をしてくれない...
   // [
   //   { id: 2, email: "akane@gmail.com", name: "akane" },
   //   { id: 4, email: "alice@prisma.io", name: "Alice" },
   // ];
+
+  // Task12: ページネーションクエリの作成;
+  // 前回のcursorをstateに持ち、クリックされたら次のデータを取得などできる
+  let myCursor = 0;
+  const secondQueryResults = await prisma.user.findMany({
+    take: 2,
+    skip: 1,
+    // cursor: {
+    //   id: myCursor,
+    // },
+    orderBy: {
+      id: "asc",
+    },
+  });
+  const lastPostInResults = secondQueryResults[1];
+  myCursor = lastPostInResults.id;
+  console.log(myCursor);
+  // 3
 };
 
 main()
