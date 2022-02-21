@@ -77,18 +77,41 @@ const main = async () => {
   // { id: 4, email: 'alice@prisma.io', name: 'Alice' }
 
   // Task8: フィールドのサブセットのみを選択するクエリの作成
-  const result = await prisma.user.findMany({
-    select: {
-      id: true,
-      name: true,
-    },
-  });
-  console.log(result);
+  // const result = await prisma.user.findMany({
+  //   select: {
+  //     id: true,
+  //     name: true,
+  //   },
+  // });
+  // console.log(result);
   // [
   //   { id: 1, name: "taka" },
   //   { id: 2, name: "akane" },
   //   { id: 3, name: "tooyama" },
   //   { id: 4, name: "Alice" },
+  // ];
+
+  // Task9: リレーションを結果に含めるためのネストしたクエリの作成
+  const result = await prisma.user.findMany({
+    where: { email: "alice@prisma.io" },
+    include: { posts: true },
+  });
+  console.dir(result, { depth: null });
+  // [
+  //   {
+  //     id: 4,
+  //     email: "alice@prisma.io",
+  //     name: "Alice",
+  //     posts: [
+  //       {
+  //         id: 1,
+  //         title: "Hello World",
+  //         content: null,
+  //         published: false,
+  //         authorId: 4,
+  //       },
+  //     ],
+  //   },
   // ];
 };
 
