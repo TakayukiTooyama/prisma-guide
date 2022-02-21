@@ -68,13 +68,28 @@ const main = async () => {
   // }
 
   // Task7: 一意な値を持つ単一の User レコードを取得するクエリの作成
-  const result = await prisma.user.findUnique({
-    where: {
-      email: "alice@prisma.io",
+  // const result = await prisma.user.findUnique({
+  //   where: {
+  //     email: "alice@prisma.io",
+  //   },
+  // });
+  // console.log(result);
+  // { id: 4, email: 'alice@prisma.io', name: 'Alice' }
+
+  // Task8: フィールドのサブセットのみを選択するクエリの作成
+  const result = await prisma.user.findMany({
+    select: {
+      id: true,
+      name: true,
     },
   });
   console.log(result);
-  // { id: 4, email: 'alice@prisma.io', name: 'Alice' }
+  // [
+  //   { id: 1, name: "taka" },
+  //   { id: 2, name: "akane" },
+  //   { id: 3, name: "tooyama" },
+  //   { id: 4, name: "Alice" },
+  // ];
 };
 
 main()
