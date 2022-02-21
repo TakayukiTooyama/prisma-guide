@@ -13,13 +13,24 @@ const main = async () => {
   // ];
 
   // Task2: 新しい User レコード を作成するクエリの作成
-  const result = await prisma.user.create({
-    data: {
+  // const result = await prisma.user.create({
+  //   data: {
+  //     email: "alice@prisma.io",
+  //   },
+  // });
+  // console.log(result);
+  // { id: 4, email: 'alice@prisma.io', name: null }
+
+  // Task3: 既存の User レコードを更新するクエリの作成
+  const result = await prisma.user.update({
+    where: {
       email: "alice@prisma.io",
+    },
+    data: {
+      name: "Alice",
     },
   });
   console.log(result);
-  // { id: 4, email: 'alice@prisma.io', name: null }
 };
 
 main()
